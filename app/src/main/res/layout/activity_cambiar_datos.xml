@@ -1,0 +1,354 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/rl_view"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Nombres: "
+                    android:layout_margin="10dp"
+                    android:singleLine="true"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_nombre"
+                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Nombres"
+                    android:text="Repelin"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:inputType="textPersonName" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Apellidos: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_apellidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Apellidos"
+                    android:layout_weight="2.5"
+                    android:text="Cuchara"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textPersonName" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:text="Cedula: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_cedula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Cedula"
+                    android:layout_weight="2.5"
+                    android:text="123456"
+                    android:digits="1234567890 "
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:enabled="false"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:inputType="number" />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Direccion: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_direccion"
+                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Direccion"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:text="Calle 32a"
+                    android:inputType="textPersonName" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.6"
+                    android:text="Telefono: " />
+
+                <EditText
+                    android:id="@+id/editText_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:singleLine="true"
+                    android:hint="Telefono"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:layout_weight="2.5"
+                    android:text="3143616199"
+                    android:inputType="phone" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:layout_weight="1"
+                    android:text="EPS" />
+
+
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_eps"
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="26dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:layout_weight="1"
+                    android:text="Pension" />
+
+
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_pension"
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:layout_weight="1"
+                    android:text="ARL" />
+
+
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_arl"
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="14dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="12dp"
+                    android:text="Rango ARL" />
+
+
+
+
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/number_picker_local"
+                    android:layout_weight="2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    app:np_width="84dp"
+                    app:np_height="180dp"
+                    app:np_dividerColor="#ffffff"
+                    app:np_max="5"
+                    app:np_min="1"
+                    app:np_selectedTextColor="@color/colorPrimary"
+                    app:np_textColor="@color/colorPrimary"
+                    app:np_selectedTextSize="15dp"
+                    app:np_textSize="25dp"
+                    app:np_value="3" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:text="Costo: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_costo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Costo"
+                    android:layout_weight="2.3"
+                    android:digits="1234567890 "
+                    android:maxLength="10"
+                    android:inputType="number" />
+
+
+            </LinearLayout>
+
+
+
+
+
+            <Button
+                android:layout_margin="20dp"
+                android:id="@+id/btn_registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Actualizar datos" />
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
+</LinearLayout>
+

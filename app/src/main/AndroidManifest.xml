@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="gestionar.soft3.inge.gestionar">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Splash"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Registro" />
+        <activity
+            android:name=".RegistrarAfiliacion"
+            android:label="Registrar afiliado" />
+        <activity android:name=".RegistrarUsuario" />
+        <activity
+            android:name=".ListaAfiliados"
+            android:label="Afiliados" />
+        <activity
+            android:name=".CambiarDatos"
+            android:label="Actualizar datos" />
+        <activity
+            android:name=".RegistroBeneficiario"
+            android:label="Registro beneficiario" />
+        <activity android:name=".VerBeneficiarios"
+            android:label="Beneficiarios"
+            ></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,236 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/rl_view"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Cotizante: "
+                    android:layout_margin="10dp"
+                    android:singleLine="true"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_cotizandte"
+                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Cotizante"
+                    android:enabled="false"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:inputType="textPersonName" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Nombres: "
+                    android:layout_margin="10dp"
+                    android:singleLine="true"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_nombre"
+                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Nombres"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:inputType="textPersonName" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Apellidos: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_apellidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Apellidos"
+                    android:layout_weight="2.5"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textPersonName" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:text="Cedula: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_cedula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Cedula"
+                    android:layout_weight="2.5"
+                    android:digits="1234567890 "
+                    android:maxLength="10"
+                    android:singleLine="true"
+
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:inputType="number" />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Parentesco: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_parentesco"
+                    android:layout_weight="2.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Parentesco"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textPersonName" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.5"
+                    android:text="Fecha nacimiento: " />
+
+                <EditText
+                    android:id="@+id/editText_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:singleLine="true"
+                    android:hint="Fecha nacimiento"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:layout_weight="2.5"
+                    android:inputType="date" />
+
+
+            </LinearLayout>
+
+
+
+
+
+
+            <Button
+                android:layout_margin="20dp"
+                android:id="@+id/btn_registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Registrar beneficiario" />
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
+</LinearLayout>
+

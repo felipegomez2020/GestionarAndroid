@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_afiliacion"
+        android:icon="@drawable/afiliacion"
+        android:enabled="true"
+        android:title="Afiliacion"/>
+    <item
+        android:id="@+id/action_control"
+        android:icon="@drawable/control"
+        android:enabled="true"
+        android:title="Control"/>
+
+</menu>

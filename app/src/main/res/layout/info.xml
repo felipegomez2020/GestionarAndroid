@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azulito"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:text="Informacion"
+            />
+
+    </LinearLayout>
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Nombre: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_Cedula_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Cedula: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/tv_direccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Direccion: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_telefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Telefono: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_eps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="EPS: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/tv_arl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Arl: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/tv_pension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Pension: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/tv_rango"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Rango ARL: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/tv_costo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Costo: "
+        android:textSize="18dp"
+        android:textColor="#000000"
+        />
+
+</LinearLayout>
+
+
+
+
+
+
+        <Button
+            android:id="@+id/btn_aceptar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="@color/azulito"
+            android:layout_weight="1"
+            android:text="Aceptar"
+            />
+
+
+
+</LinearLayout>
