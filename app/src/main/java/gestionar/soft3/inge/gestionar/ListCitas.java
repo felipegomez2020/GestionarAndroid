@@ -238,17 +238,17 @@ public class ListCitas extends AppCompatActivity {
 
 
             @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-
+            protected FilterResults performFiltering(CharSequence constraint)
+            {
                 FilterResults resulst = new FilterResults();
                 if(constraint != null && constraint.length()>0)
                 {
                     constraint = constraint.toString();
-                    ArrayList<CitaMedica> filtro = new ArrayList<CitaMedica>();
+                    ArrayList<CitaMedica> filtro = new ArrayList<>();
 
                     for(Integer i=0;i<filtroList.size();i++)
                     {
-                        String nombre=filtroList.get(i).getCedula();
+                        String nombre=filtroList.get(i).getFecha_cita();
                         Log.d("Prueba",nombre);
                         if(nombre.toLowerCase().contains((""+constraint).toLowerCase()))
                         {

@@ -225,7 +225,7 @@ public class ListMora extends AppCompatActivity {
                 if(constraint != null && constraint.length()>0)
                 {
                     constraint = constraint.toString();
-                    ArrayList<Afiliado> filtro = new ArrayList<Afiliado>();
+                    ArrayList<Afiliado> filtro = new ArrayList<>();
 
                     for(Integer i=0;i<filtroList.size();i++)
                     {

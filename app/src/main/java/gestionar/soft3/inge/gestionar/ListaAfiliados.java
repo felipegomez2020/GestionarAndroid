@@ -232,7 +232,7 @@ public class ListaAfiliados extends AppCompatActivity {
                 if(constraint != null && constraint.length()>0)
                 {
                     constraint = constraint.toString();
-                    ArrayList<Afiliado> filtro = new ArrayList<Afiliado>();
+                    ArrayList<Afiliado> filtro = new ArrayList<>();
 
                     for(Integer i=0;i<filtroList.size();i++)
                     {
@@ -619,10 +619,15 @@ public class ListaAfiliados extends AppCompatActivity {
                             public void onResponse(Call<gestionar.soft3.inge.gestionar.pojo.Response> call, Response<gestionar.soft3.inge.gestionar.pojo.Response> response) {
                                 if (response.code()==200)
                                 {
-                                    Toast.makeText(getApplicationContext(),
-                                            response.body().getMensaje(),Toast.LENGTH_SHORT).show();
-                                    cargarAfiliados();
-                                    dialog.cancel();
+                                    try {
+                                        Toast.makeText(getApplicationContext(),
+                                                response.body().getMensaje(), Toast.LENGTH_SHORT).show();
+                                        cargarAfiliados();
+                                        dialog.cancel();
+                                    }catch (NullPointerException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
 

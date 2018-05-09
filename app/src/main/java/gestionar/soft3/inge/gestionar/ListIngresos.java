@@ -240,7 +240,7 @@ public class ListIngresos extends AppCompatActivity {
                 if(constraint != null && constraint.length()>0)
                 {
                     constraint = constraint.toString();
-                    ArrayList<Ingreso> filtro = new ArrayList<Ingreso>();
+                    ArrayList<Ingreso> filtro = new ArrayList<>();
 
                     for(Integer i=0;i<filtroList.size();i++)
                     {

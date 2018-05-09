@@ -44,26 +44,29 @@ public class RegistroBeneficiario extends AppCompatActivity {
         setContentView(R.layout.activity_registro_beneficiario);
         iniciarComponentes();
         retrofit_clase();
-        objeto = (Afiliado) getIntent().getExtras().getSerializable("afiliado");
+        try {
+            objeto = (Afiliado) getIntent().getExtras().getSerializable("afiliado");
 
-        if (objeto==null)
-        {
-            Log.d("Prueba","null");
-        }else
-        {
-            editText_cotizante.setText(objeto.getNombres() + " " + objeto.getApellidos());
-             cedula = objeto.getCedula();
-        }
-
-
-        findViewById(R.id.btn_registro).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                registrarBeneficiario();
+            if (objeto == null) {
+                Log.d("Prueba", "null");
+            } else {
+                editText_cotizante.setText(objeto.getNombres() + " " + objeto.getApellidos());
+                cedula = objeto.getCedula();
             }
-        });
 
+
+            findViewById(R.id.btn_registro).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    registrarBeneficiario();
+                }
+            });
+
+        }catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void registrarBeneficiario()

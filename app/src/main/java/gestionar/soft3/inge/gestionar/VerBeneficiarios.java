@@ -52,10 +52,20 @@ public class VerBeneficiarios extends AppCompatActivity {
         searchView = findViewById(R.id.sv);
 
 
-        retrofit_clase();
-        Afiliado objeto = (Afiliado) getIntent().getExtras().getSerializable("afiliado");
-        cargarAfiliados(objeto.getCedula());
+        try {
+            retrofit_clase();
+            Afiliado objeto = (Afiliado) getIntent().getExtras().getSerializable("afiliado");
 
+            try {
+                cargarAfiliados(objeto.getCedula());
+            }catch (NullPointerException e)
+            {
+                e.printStackTrace();
+            }
+        }catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
 
 
     }
@@ -194,7 +204,7 @@ public class VerBeneficiarios extends AppCompatActivity {
                 if(constraint != null && constraint.length()>0)
                 {
                     constraint = constraint.toString();
-                    ArrayList<Beneficiario> filtro = new ArrayList<Beneficiario>();
+                    ArrayList<Beneficiario> filtro = new ArrayList<>();
 
                     for(Integer i=0;i<filtroList.size();i++)
                     {

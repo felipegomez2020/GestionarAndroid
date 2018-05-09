@@ -48,12 +48,12 @@ public class CambiarDatos extends AppCompatActivity {
 
 
         iniciarComponentes();
-        Afiliado objeto = (Afiliado) getIntent().getExtras().getSerializable("afiliado");
-
-        if (objeto==null)
-        {
-            Log.d("Prueba","null");
-        }else
+        try {
+            Afiliado objeto = (Afiliado) getIntent().getExtras().getSerializable("afiliado");
+            if (objeto==null)
+            {
+                Log.d("Prueba","null");
+            }else
             {
                 editText_nombre.setText(objeto.getNombres());
                 editText_apellidos.setText(objeto.getApellidos());
@@ -65,16 +65,22 @@ public class CambiarDatos extends AppCompatActivity {
             }
 
 
-        eps = eps_array[0];
-        arl = arl_array[0];
-        pension = pension_array[0];
-        findViewById(R.id.btn_registro).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                registrar();
-            }
-        });
+            eps = eps_array[0];
+            arl = arl_array[0];
+            pension = pension_array[0];
+            findViewById(R.id.btn_registro).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    registrar();
+                }
+            });
+        }catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
+
 
     }
 
