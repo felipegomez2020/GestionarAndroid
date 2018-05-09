@@ -357,9 +357,6 @@ public class ListaAfiliados extends AppCompatActivity {
                 else  if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonAgregarPeticion)
                 {
                     customDialog.dismiss();
-
-
-                    agregarDerechoPeticion(nombre,cedula);
                 }
 
 
