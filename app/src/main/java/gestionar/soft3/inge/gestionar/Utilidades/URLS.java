@@ -7,7 +7,4 @@ public class URLS
     public static String PUERTO = ":8000";
     public static String REST = "/rest/";
     public static String SERVER = PROTOCOLO + IP + PUERTO + REST ;
-
-
-
 }

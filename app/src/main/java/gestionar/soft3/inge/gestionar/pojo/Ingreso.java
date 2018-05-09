@@ -14,6 +14,9 @@ public class Ingreso
     @SerializedName("afiliado")
     @Expose
     private String cedula_afiliado;
+    @SerializedName("cedula")
+    @Expose
+    private String cedula;
     @SerializedName("date")
     @Expose
     private String fecha;
@@ -44,6 +47,14 @@ public class Ingreso
     }
 
 
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
     public String getFecha() {
         return fecha;
     }
@@ -51,4 +62,13 @@ public class Ingreso
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+
+    public Ingreso(String motivo, String valor, String cedula_afiliado, String fecha) {
+        this.motivo = motivo;
+        this.valor = valor;
+        this.cedula_afiliado = cedula_afiliado;
+        this.fecha = fecha;
+    }
+    public Ingreso(){}
 }

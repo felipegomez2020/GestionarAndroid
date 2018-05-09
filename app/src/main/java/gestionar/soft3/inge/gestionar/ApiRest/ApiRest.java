@@ -4,6 +4,7 @@ import java.util.List;
 
 import gestionar.soft3.inge.gestionar.pojo.Afiliado;
 import gestionar.soft3.inge.gestionar.pojo.Beneficiario;
+import gestionar.soft3.inge.gestionar.pojo.CitaMedica;
 import gestionar.soft3.inge.gestionar.pojo.Ingreso;
 import gestionar.soft3.inge.gestionar.pojo.Response;
 import gestionar.soft3.inge.gestionar.pojo.UsuarioAdministrativo;
@@ -29,11 +30,23 @@ public interface ApiRest {
     @POST("obtener_beneficiarios/")
     Call <List<Beneficiario>>obtenerBeneficiarios(@Field("cedula_afiliado") String cedula);
 
+    @FormUrlEncoded
+    @POST("renovar_afiliacion/")
+    Call <Response>renovarAfiliacion(@Field("cedula") String cedula,@Field("correo") String correo);
+
+    @FormUrlEncoded
+    @POST("enviar_correo/")
+    Call <Response>enviarCorreo(@Field("correo") String correo);
+
     @POST("registrar_afiliado/")
     Call<Afiliado> registro_afiliado(@Body Afiliado afiliado);
 
     @POST("registrar_ingresos/")
     Call<Ingreso> registro_ingreso(@Body Ingreso afiliado);
+
+
+    @POST("registro_cita/")
+    Call<CitaMedica> registro_cita(@Body CitaMedica citaMedica);
 
     @POST("registrar_beneficiario/")
     Call<Beneficiario> registro_beneficiario(@Body Beneficiario beneficiario);
@@ -45,9 +58,14 @@ public interface ApiRest {
     @GET("obtener_afiliado/")
     Call <List<Afiliado>> obtenerAfiliados();
 
+    @GET("obtener_afiliado_mora/")
+    Call <List<Afiliado>> obtenerAfiliadosmora();
+
 
     @GET("obtener_ingresos/")
     Call <List<Ingreso>> obtenerIngresos();
 
+    @GET("obtener_citas/")
+    Call <List<CitaMedica>> obtenerCitas();
 
 }

@@ -10,12 +10,19 @@ public class Afiliado implements Serializable {
     @SerializedName("cedula")
     @Expose
     private String cedula;
+    @SerializedName("ultima_afiliacion")
+    @Expose
+    private String ultima_afiliacion;
+
     @SerializedName("nombres")
     @Expose
     private String nombres;
     @SerializedName("apellidos")
     @Expose
     private String apellidos;
+    @SerializedName("correo")
+    @Expose
+    private String correo;
     @SerializedName("direccion")
     @Expose
     private String direccion;
@@ -118,11 +125,27 @@ public class Afiliado implements Serializable {
         this.pension = pension;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
 
-    public Afiliado(String cedula, String nombres, String apellidos, String direccion, String telefono, String eps, String arl, String pension, Integer rango, Double costo) {
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getUltima_afiliacion() {
+        return ultima_afiliacion;
+    }
+
+    public void setUltima_afiliacion(String ultima_afiliacion) {
+        this.ultima_afiliacion = ultima_afiliacion;
+    }
+
+    public Afiliado(String cedula, String nombres, String apellidos, String correo, String direccion, String telefono, String eps, String arl, String pension, Integer rango, Double costo) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.correo = correo;
         this.direccion = direccion;
         this.telefono = telefono;
         this.eps = eps;
@@ -132,5 +155,4 @@ public class Afiliado implements Serializable {
         this.costo = costo;
     }
 
-    public Afiliado(){}
 }

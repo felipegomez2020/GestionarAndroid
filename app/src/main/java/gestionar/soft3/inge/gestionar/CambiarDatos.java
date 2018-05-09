@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CambiarDatos extends AppCompatActivity {
 
     MaterialSpinner spinner_eps,spinner_pension,spinner_arl;
-    EditText editText_nombre,editText_apellidos,editText_direccion,editText_telefono,editText_cedula,editText_costo;
+    EditText editText_nombre,editText_apellidos,editText_direccion,editText_telefono,editText_cedula,editText_costo,editText_correo;
     com.shawnlin.numberpicker.NumberPicker numberPicker;
 
     Context context;
@@ -58,6 +58,7 @@ public class CambiarDatos extends AppCompatActivity {
                 editText_nombre.setText(objeto.getNombres());
                 editText_apellidos.setText(objeto.getApellidos());
                 editText_direccion.setText(objeto.getDireccion());
+                editText_correo.setText(objeto.getCorreo());
                 editText_telefono.setText(objeto.getTelefono());
                 editText_cedula.setText(objeto.getCedula());
                 editText_costo.setText(objeto.getCosto()+"");
@@ -84,6 +85,8 @@ public class CambiarDatos extends AppCompatActivity {
         String apellidos = editText_apellidos.getText().toString();
         String cedula = editText_cedula.getText().toString();
         String direccion = editText_direccion.getText().toString();
+        String correo = editText_correo.getText().toString();
+        String telefono = editText_telefono.getText().toString();
         int rango = numberPicker.getValue();
         double costo =Double.parseDouble(editText_costo.getText().toString());
 
@@ -95,18 +98,7 @@ public class CambiarDatos extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Faltan campos por llenar",Toast.LENGTH_SHORT).show();
         }else
             {
-                Afiliado afiliado= new Afiliado();
-                afiliado.setNombres(nombre);
-                afiliado.setApellidos(editText_apellidos.getText().toString());
-                afiliado.setCedula(editText_cedula.getText().toString());
-                afiliado.setDireccion(editText_direccion.getText().toString());
-                afiliado.setTelefono(editText_telefono.getText().toString());
-                afiliado.setArl(arl);
-                afiliado.setEps(eps);
-                afiliado.setPension(pension);
-                afiliado.setRango(rango);
-                afiliado.setCosto(costo);
-
+                Afiliado afiliado= new Afiliado(cedula,nombre,apellidos,correo,direccion,telefono,eps,arl,pension,rango,costo);
 
 
 
@@ -155,7 +147,7 @@ public class CambiarDatos extends AppCompatActivity {
     private void iniciarComponentes()
     {
 
-        spinner_eps = (MaterialSpinner) findViewById(R.id.spinner_eps);
+        spinner_eps = findViewById(R.id.spinner_eps);
         spinner_eps.setItems(eps_array);
         spinner_eps.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
@@ -187,12 +179,14 @@ public class CambiarDatos extends AppCompatActivity {
 
 
         editText_nombre = findViewById(R.id.editText_nombre);
+        editText_nombre = findViewById(R.id.editText_nombre);
         editText_apellidos = findViewById(R.id.editText_apellidos);
         editText_direccion = findViewById(R.id.editText_direccion);
         editText_telefono = findViewById(R.id.editText_telefono);
         editText_cedula = findViewById(R.id.editText_cedula);
         editText_costo = findViewById(R.id.editText_costo);
-        numberPicker = (com.shawnlin.numberpicker.NumberPicker) findViewById(R.id.number_picker_local);
+        editText_correo = findViewById(R.id.editText_correo);
+        numberPicker =findViewById(R.id.number_picker_local);
 
         retrofit_clase();
 

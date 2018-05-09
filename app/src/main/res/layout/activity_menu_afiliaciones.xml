@@ -108,7 +108,6 @@
                     android:digits="1234567890 "
                     android:maxLength="10"
                     android:singleLine="true"
-
                     android:background="@drawable/editextstyle"
                     android:padding="10dp"
                     android:inputType="number" />
@@ -116,7 +115,35 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:text="Correo: "
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/editText_correo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Correo"
+                    android:layout_weight="2.5"
+                    android:background="@drawable/editextstyle"
+                    android:padding="10dp"
+                    android:inputType="textEmailAddress" />
+
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -175,6 +202,8 @@
                     android:background="@drawable/editextstyle"
                     android:padding="10dp"
                     android:layout_weight="2.5"
+                    android:digits="1234567890 "
+                    android:maxLength="10"
                     android:inputType="phone" />
 
 

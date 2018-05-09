@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import gestionar.soft3.inge.gestionar.ApiRest.ApiRest;
 import gestionar.soft3.inge.gestionar.Utilidades.URLS;
 import gestionar.soft3.inge.gestionar.Utilidades.Utilidades;
@@ -24,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegistrarAfiliacion extends AppCompatActivity {
 
     MaterialSpinner spinner_eps,spinner_pension,spinner_arl;
-    EditText editText_nombre,editText_apellidos,editText_direccion,editText_telefono,editText_cedula,editText_costo;
+    EditText editText_nombre,editText_apellidos,editText_direccion,editText_telefono,editText_cedula,editText_costo,editText_correo;
     com.shawnlin.numberpicker.NumberPicker numberPicker;
 
     Context context;
@@ -68,51 +71,59 @@ public class RegistrarAfiliacion extends AppCompatActivity {
         String nombre = editText_nombre.getText().toString();
         String apellidos = editText_apellidos.getText().toString();
         String cedula = editText_cedula.getText().toString();
+        String correo = editText_correo.getText().toString();
         String direccion = editText_direccion.getText().toString();
         String telefono = editText_telefono.getText().toString();
         int rango = numberPicker.getValue();
         String costo =editText_costo.getText().toString();
 
         if (Utilidades.validarCampo(nombre)||Utilidades.validarCampo(apellidos)||Utilidades.validarCampo(cedula)||
-                Utilidades.validarCampo(direccion)||Utilidades.validarCampo(rango+"")||Utilidades.validarCampo(costo+"")
+                Utilidades.validarCampo(direccion)||Utilidades.validarCampo(correo) ||Utilidades.validarCampo(rango+"")||Utilidades.validarCampo(costo+"")
                 )
         {
             Toast.makeText(getApplicationContext(),"Faltan campos por llenar",Toast.LENGTH_SHORT).show();
         }else
         {
-            Afiliado afiliado= new Afiliado();
-            afiliado.setNombres(nombre);
-            afiliado.setApellidos(apellidos);
-            afiliado.setCedula(cedula);
-            afiliado.setDireccion(direccion);
-            afiliado.setTelefono(telefono);
-            afiliado.setArl(arl);
-            afiliado.setEps(eps);
-            afiliado.setPension(pension);
-            afiliado.setRango(rango);
-            afiliado.setCosto(Double.parseDouble(costo));
 
-            Call<Afiliado> registro = apiRest.registro_afiliado(afiliado);
-            registro.enqueue(new Callback<Afiliado>() {
-                @Override
-                public void onResponse(Call<Afiliado> call, Response<Afiliado> response)
+
+            if(!validarEmailFuerte(correo))
+            {
+                Toast.makeText(getApplicationContext(),"Correo no valido",Toast.LENGTH_SHORT).show();
+            }else
                 {
+                    Afiliado afiliado= new Afiliado(cedula,nombre,apellidos,correo,direccion,
+                            telefono,eps,arl,pension,rango,Double.parseDouble(costo));
 
-                    if (response.code() == 201)
-                    {
-                        Toast.makeText(getApplicationContext(),"Registro correcto",Toast.LENGTH_LONG).show();
-                        finish();
-                    }
-                    else if (response.code() == 302)
-                    {
-                        Toast.makeText(getApplicationContext(),"Usuario ya existe",Toast.LENGTH_SHORT).show();
-                    }
-                }
-                @Override
-                public void onFailure(Call<Afiliado> call, Throwable t) {
 
+                    Call<Afiliado> registro = apiRest.registro_afiliado(afiliado);
+                    registro.enqueue(new Callback<Afiliado>() {
+                        @Override
+                        public void onResponse(Call<Afiliado> call, Response<Afiliado> response)
+                        {
+
+                            if (response.code() == 201)
+                            {
+                                Toast.makeText(getApplicationContext(),"Registro correcto",Toast.LENGTH_LONG).show();
+                                finish();
+                            }
+                            else if (response.code() == 302)
+                            {
+                                Toast.makeText(getApplicationContext(),"Usuario ya existe",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Afiliado> call, Throwable t) {
+
+                        }
+                    });
                 }
-            });
+
+
+            /**
+
+
+
+            */
         }
 
 
@@ -161,6 +172,7 @@ public class RegistrarAfiliacion extends AppCompatActivity {
         editText_telefono = findViewById(R.id.editText_telefono);
         editText_cedula = findViewById(R.id.editText_cedula);
         editText_costo = findViewById(R.id.editText_costo);
+        editText_correo = findViewById(R.id.editText_correo);
         numberPicker = (com.shawnlin.numberpicker.NumberPicker) findViewById(R.id.number_picker_local);
 
         retrofit_clase();
@@ -176,6 +188,17 @@ public class RegistrarAfiliacion extends AppCompatActivity {
                 .build();
 
         apiRest=retrofit.create(ApiRest.class);
+    }
+
+
+    public static boolean validarEmailFuerte(String email){
+
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 
 }

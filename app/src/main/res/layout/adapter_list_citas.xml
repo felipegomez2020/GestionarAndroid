@@ -16,9 +16,9 @@
         <ImageView
             android:id="@+id/image_perfil"
             android:layout_margin="5dp"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_gravity="center"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:src="@drawable/profile"
             />
 
@@ -28,27 +28,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             android:orientation="vertical"
             >
-
-            <TextView
-                android:id="@+id/tv_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="18dp"
-                android:textColor="#000000"
-                android:text="Nombre"
-                />
 
             <TextView
                 android:id="@+id/tv_cedula"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:text="Cedula titular: "
+                />
+
+
+            <TextView
+                android:id="@+id/tv_motivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="16dp"
                 android:textColor="@color/colorPrimary"
-                android:text="Cedula"
+                android:text="motivo: "
+                />
+
+            <TextView
+                android:id="@+id/tv_valor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textColor="@color/colorPrimary"
+                android:text="Valor: "
+                />
+
+            <TextView
+                android:id="@+id/tv_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textColor="@color/colorPrimary"
+                android:text="Fecha cita: "
                 />
 
 

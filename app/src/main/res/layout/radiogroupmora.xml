@@ -21,7 +21,7 @@
             android:textSize="20dp"
             android:textColor="#FFFFFF"
             android:layout_gravity="center"
-            android:text="¿Que deseas hacer?"
+            android:text="Usuario en mora"
             />
 
     </LinearLayout>
@@ -39,9 +39,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Nombre del personaje"
+        android:text="Nombre: "
         android:textSize="18dp"
         android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/tv_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Ultimo pago: "
+        android:textSize="18dp"
+        android:textColor="#FF0000"
         />
 
 
@@ -50,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Cedula"
+        android:text="Cedula: "
         android:textSize="18dp"
         android:textColor="#000000"
         />
@@ -62,71 +72,24 @@
         android:id="@+id/radio_grupo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         >
 
 
-
         <RadioButton
-            android:id="@+id/radioButtonVer"
+            android:id="@+id/radioButtonCorreoElectronico"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ver Informacion detallada" />
+            android:text="Enviar correo electronico de alerta" />
 
 
         <RadioButton
-            android:id="@+id/radioButtonActualizar"
+            android:id="@+id/radioButtonAgregarPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Actualizar informacion" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonEliminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Borrar de la base de datos este afiliado" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonAgregar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Agregar Beneficiario" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonVerBeneficiarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ver beneficiarios" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonAgregarIngreso"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Agregar ingreso" />
-
-
-        <RadioButton
-            android:id="@+id/radioButtonAgregarCitaMedica"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Agregar cita medica" />
-
-
-
-
-
-
+            android:text="Registrar pago nuevo" />
 
     </RadioGroup>
     <LinearLayout

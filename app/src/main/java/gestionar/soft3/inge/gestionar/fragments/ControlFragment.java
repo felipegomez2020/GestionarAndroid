@@ -2,9 +2,11 @@ package gestionar.soft3.inge.gestionar.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 
 import gestionar.soft3.inge.gestionar.ApiRest.ApiRest;
+import gestionar.soft3.inge.gestionar.ListCitas;
+import gestionar.soft3.inge.gestionar.ListIngresos;
+import gestionar.soft3.inge.gestionar.ListMora;
 import gestionar.soft3.inge.gestionar.ListaAfiliados;
 import gestionar.soft3.inge.gestionar.R;
 import gestionar.soft3.inge.gestionar.Utilidades.CircleTransform;
@@ -37,12 +42,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ControlFragment extends Fragment {
+public class ControlFragment extends Fragment implements View.OnClickListener {
 
     ArrayList<Ingreso> misAfiliados;
     ListView listView;
     ApiRest apiRest;
     Retrofit retrofit;
+    CardView cardView_ingresos,cardView_citas,cardView_mora,cardView_derecho;
 
 
     public ControlFragment() {
@@ -54,13 +60,77 @@ public class ControlFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_control, container, false);
 
-        listView =view.findViewById(R.id.listview_ingresos);
+        inicializarComponentes(view);
 
-        retrofit_clase();
-        obtenerIngresos();
+
+
 
         return view;
     }
+
+    private void inicializarComponentes(View view)
+    {
+        cardView_ingresos =view.findViewById(R.id.card_ingresos);
+        cardView_citas =view.findViewById(R.id.card_citas);
+        cardView_mora =view.findViewById(R.id.card_mora);
+        cardView_derecho =view.findViewById(R.id.card_derecho);
+
+        cardView_ingresos.setOnClickListener(this);
+        cardView_citas.setOnClickListener(this);
+        cardView_mora.setOnClickListener(this);
+        cardView_derecho.setOnClickListener(this);
+
+
+
+    }
+    @Override
+    public void onClick(View v) {
+
+        Intent intent;
+        switch (v.getId())
+        {
+            case R.id.card_ingresos:
+                intent = new Intent(getActivity(), ListIngresos.class);
+                startActivity(intent);
+                break;
+
+            case R.id.card_citas:
+                intent = new Intent(getActivity(), ListCitas.class);
+                startActivity(intent);
+                break;
+
+
+            case R.id.card_mora:
+                intent = new Intent(getActivity(), ListMora.class);
+                startActivity(intent);
+                break;
+
+
+            case R.id.card_derecho:
+                Toast.makeText(getActivity(),"Derecho",Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void obtenerIngresos(){
         Call <List<Ingreso>> ingresos = apiRest.obtenerIngresos();
@@ -85,8 +155,6 @@ public class ControlFragment extends Fragment {
             }
         });
     }
-
-
     private void retrofit_clase()
     {
         retrofit = new Retrofit.Builder()

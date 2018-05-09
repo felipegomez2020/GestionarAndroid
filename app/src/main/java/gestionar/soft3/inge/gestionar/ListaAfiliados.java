@@ -1,6 +1,7 @@
 package gestionar.soft3.inge.gestionar;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -40,7 +42,9 @@ import gestionar.soft3.inge.gestionar.ApiRest.ApiRest;
 import gestionar.soft3.inge.gestionar.Utilidades.CircleTransform;
 import gestionar.soft3.inge.gestionar.Utilidades.URLS;
 import gestionar.soft3.inge.gestionar.Utilidades.Utilidades;
+import gestionar.soft3.inge.gestionar.fragments.DatePickerFragment;
 import gestionar.soft3.inge.gestionar.pojo.Afiliado;
+import gestionar.soft3.inge.gestionar.pojo.CitaMedica;
 import gestionar.soft3.inge.gestionar.pojo.Ingreso;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,6 +56,7 @@ public class ListaAfiliados extends AppCompatActivity {
 
     ArrayList<Afiliado> misAfiliados;
     ArrayList<Afiliado> temp;
+
     ListView listView;
     SearchView searchView;
     ApiRest apiRest;
@@ -237,6 +242,7 @@ public class ListaAfiliados extends AppCompatActivity {
                             Afiliado d= new Afiliado(filtroList.get(i).getCedula(),
                                     filtroList.get(i).getNombres(),
                                     filtroList.get(i).getApellidos(),
+                                    filtroList.get(i).getCorreo(),
                                     filtroList.get(i).getDireccion(),
                                     filtroList.get(i).getTelefono(),
                                     filtroList.get(i).getEps(),
@@ -247,9 +253,6 @@ public class ListaAfiliados extends AppCompatActivity {
                             );
 
                             filtro.add(d);
-                        }
-                        else
-                        {
                         }
                     }
                     resulst.count= filtro.size();
@@ -271,90 +274,6 @@ public class ListaAfiliados extends AppCompatActivity {
             }
         }
     }
-
-    class AdapterAsistentesExpandible extends BaseExpandableListAdapter implements Filterable
-    {
-
-        private LayoutInflater layoutInflater;
-        Context context;
-        AdapterAsistentes.CustomFilter filtro;
-        ArrayList<Afiliado>afiliados;
-        ArrayList<Afiliado> filtroList;
-        Map<String,ArrayList<String>> child;
-
-
-        public AdapterAsistentesExpandible(Context context, ArrayList<Afiliado> afiliados, Map<String, ArrayList<String>> child)
-        {
-            this.context = context;
-            this.afiliados = afiliados;
-            this.child = child;
-        }
-
-        @Override
-        public int getGroupCount()
-        {
-            return afiliados.size();
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition)
-        {
-            return 1;
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return null;
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return 0;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return 0;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return false;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            return null;
-        }
-
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent)
-        {
-
-
-
-            return null;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return false;
-        }
-
-        @Override
-        public Filter getFilter() {
-            return null;
-        }
-
-
-
-    }
-
 
 
     private void showRadioButtonDialog(final String nombre, final String cedula, final Afiliado id) {
@@ -393,7 +312,8 @@ public class ListaAfiliados extends AppCompatActivity {
                     startActivity(intent);
                     finish();
 
-                }else  if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonVer)
+                }
+                else  if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonVer)
                 {
                     customDialog.dismiss();
                     mostrarInfo(id);
@@ -427,14 +347,17 @@ public class ListaAfiliados extends AppCompatActivity {
                 }
                 else  if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonAgregarIngreso)
                 {
-
-                    Log.d("Entra","entra");
                     customDialog.dismiss();
-                    Log.d("Entra","entra2");
                     agregarIngreso(nombre,cedula);
-
-
+                } else  if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonAgregarCitaMedica)
+                {
+                    customDialog.dismiss();
+                    agregarCitaMedica(nombre,cedula);
                 }
+
+
+
+
 
 
 
@@ -456,15 +379,152 @@ public class ListaAfiliados extends AppCompatActivity {
         customDialog.show();
     }
 
+    private void agregarCitaMedica(String nombre, final String cedula) {
+
+
+        customDialog = new Dialog(ListaAfiliados.this);
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        customDialog.setCancelable(false);
+        customDialog.setContentView(R.layout.cita_medica);
+
+        TextView tv_nom= customDialog.findViewById(R.id.tv_nombre);
+        TextView tv_cedula= customDialog.findViewById(R.id.tv_Cedula_g);
+
+        tv_nom.setText(nombre);
+        tv_cedula.setText(cedula);
+
+        final EditText editText_motivo = customDialog.findViewById(R.id.editText_motivo);
+        final EditText editText_valor = customDialog.findViewById(R.id.editText_valor);
+        final EditText editText_fecha = customDialog.findViewById(R.id.editText_fecha);
+        final EditText editText_cedula= customDialog.findViewById(R.id.editText_cedula);
+        final EditText editText_nombre= customDialog.findViewById(R.id.editText_nombre);
+
+
+        Button btn_aceptar = customDialog.findViewById(R.id.btn_aceptar);
+        Button btn_cancelar = customDialog.findViewById(R.id.btn_cancelar);
+
+        editText_fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        // +1 because january is zero
+                        String dia="";
+                        String mes="";
+                        if (day<10)
+                        {
+                            dia = 0 + "" + day;
+                        }
+                        else
+                        {
+                            dia = day+"";
+                        }
+                        if (month<10)
+                        {
+                            mes = 0 + "" + (month+1);
+                        }
+                        else
+                        {
+                            mes = (month +1) +"";
+                        }
+
+
+
+
+                        final String selectedDate = year + "-" + mes + "-" + dia;
+                        editText_fecha.setText(selectedDate);
+                    }
+                });
+                newFragment.show(getFragmentManager(), "datePicker");
+
+
+
+
+            }
+        });
+
+
+        btn_cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                customDialog.dismiss();
+            }
+        });
+        btn_aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                String motivo = editText_motivo.getText().toString();
+                String valor = editText_valor.getText().toString();
+                String fecha = editText_fecha.getText().toString();
+                String cedula_dos = editText_cedula.getText().toString();
+                String nombre = editText_nombre.getText().toString();
+
+
+
+                if (Utilidades.validarCampo(motivo)||
+                        Utilidades.validarCampo(valor) || Utilidades.validarCampo(fecha) ||
+                        Utilidades.validarCampo(cedula_dos) || Utilidades.validarCampo(nombre))
+                {
+                    customDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),"Debes llenar todos los valores",Toast.LENGTH_SHORT).show();
+                }else
+                {
+
+
+                    CitaMedica citaMedica = new CitaMedica();
+                    citaMedica.setCedula(cedula);
+
+                    citaMedica.setNombre(nombre);
+                    citaMedica.setTipo_cita(motivo);
+                    citaMedica.setCedula_dos(cedula_dos);
+                    citaMedica.setValor(valor);
+                    citaMedica.setFecha_cita(fecha);
+                    citaMedica.setValor(valor);
+
+
+                    Call<CitaMedica>c = apiRest.registro_cita(citaMedica);
+                    c.enqueue(new Callback<CitaMedica>() {
+                        @Override
+                        public void onResponse(Call<CitaMedica> call, Response<CitaMedica> response)
+                        {
+
+                            if (response.code()==200)
+                            {
+                                Toast.makeText(getApplicationContext(),"Cita registrada " +
+                                        "correctamente" , Toast.LENGTH_SHORT).show();
+                                customDialog.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<CitaMedica> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(),"Problemas de " +
+                                    "conexion, intente nuevamente" , Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+
+                }
+
+
+            }
+        });
+        customDialog.show();
+    }
+
     private void agregarIngreso(String nombre, final String cedula) {
 
-        Log.d("Entra","entra3");
 
         customDialog = new Dialog(ListaAfiliados.this);
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         customDialog.setCancelable(false);
         customDialog.setContentView(R.layout.ingreso);
-        Log.d("Entra","entra4");
 
         TextView tv_nom= customDialog.findViewById(R.id.tv_nombre);
         TextView tv_cedula= customDialog.findViewById(R.id.tv_Cedula_g);
@@ -503,7 +563,7 @@ public class ListaAfiliados extends AppCompatActivity {
                 {
 
                     Ingreso ingreso = new Ingreso();
-                    ingreso.setCedula_afiliado(cedula);
+                    ingreso.setCedula(cedula);
                     ingreso.setMotivo(motivo);
                     ingreso.setValor(valor);
                     Call<Ingreso>c = apiRest.registro_ingreso(ingreso);
@@ -523,8 +583,10 @@ public class ListaAfiliados extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Ingreso> call, Throwable t) {
-
+                        public void onFailure(Call<Ingreso> call, Throwable t)
+                        {
+                            Toast.makeText(getApplicationContext(),"Problemas de " +
+                                    "conexion, intente nuevamente" , Toast.LENGTH_SHORT).show();
                         }
                     });
 

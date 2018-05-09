@@ -41,9 +41,12 @@
         <activity
             android:name=".RegistroBeneficiario"
             android:label="Registro beneficiario" />
-        <activity android:name=".VerBeneficiarios"
-            android:label="Beneficiarios"
-            ></activity>
+        <activity
+            android:name=".VerBeneficiarios"
+            android:label="Beneficiarios" />
+        <activity android:name=".ListIngresos" />
+        <activity android:name=".ListMora" />
+        <activity android:name=".ListCitas"></activity>
     </application>
 
 </manifest>
