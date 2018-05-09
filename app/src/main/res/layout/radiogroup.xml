@@ -123,7 +123,12 @@
             android:text="Agregar cita medica" />
 
 
-
+        <RadioButton
+            android:id="@+id/radioButtonAgregarPeticion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Agregar Derecho de peticion" />
 
 
 
