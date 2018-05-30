@@ -5,6 +5,7 @@ import java.util.List;
 import gestionar.soft3.inge.gestionar.pojo.Afiliado;
 import gestionar.soft3.inge.gestionar.pojo.Beneficiario;
 import gestionar.soft3.inge.gestionar.pojo.CitaMedica;
+import gestionar.soft3.inge.gestionar.pojo.DerechoPeticion;
 import gestionar.soft3.inge.gestionar.pojo.Ingreso;
 import gestionar.soft3.inge.gestionar.pojo.Response;
 import gestionar.soft3.inge.gestionar.pojo.UsuarioAdministrativo;
@@ -48,6 +49,11 @@ public interface ApiRest {
     @POST("registro_cita/")
     Call<CitaMedica> registro_cita(@Body CitaMedica citaMedica);
 
+
+    @POST("registrarDerecho/")
+    Call<DerechoPeticion> registro_derecho(@Body DerechoPeticion derechoPeticion);
+
+
     @POST("registrar_beneficiario/")
     Call<Beneficiario> registro_beneficiario(@Body Beneficiario beneficiario);
 
@@ -67,5 +73,8 @@ public interface ApiRest {
 
     @GET("obtener_citas/")
     Call <List<CitaMedica>> obtenerCitas();
+
+    @GET("obtenerDerechos/")
+    Call <List<DerechoPeticion>> obtenerDerechos();
 
 }

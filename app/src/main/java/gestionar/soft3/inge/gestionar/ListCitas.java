@@ -35,7 +35,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListCitas extends AppCompatActivity {
+public class ListCitas extends AppCompatActivity
+{
 
     ArrayList<CitaMedica> ingresos;
     ArrayList<CitaMedica> temp;

@@ -46,7 +46,8 @@
             android:label="Beneficiarios" />
         <activity android:name=".ListIngresos" />
         <activity android:name=".ListMora" />
-        <activity android:name=".ListCitas"></activity>
+        <activity android:name=".ListCitas" />
+        <activity android:name=".ListDerechoPeticion"></activity>
     </application>
 
 </manifest>

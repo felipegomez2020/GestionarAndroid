@@ -94,7 +94,7 @@ public class CambiarDatos extends AppCompatActivity {
         String correo = editText_correo.getText().toString();
         String telefono = editText_telefono.getText().toString();
         int rango = numberPicker.getValue();
-        double costo =Double.parseDouble(editText_costo.getText().toString());
+        String costo =editText_costo.getText().toString();
 
         if (Utilidades.validarCampo(nombre)||Utilidades.validarCampo(apellidos)||Utilidades.validarCampo(cedula)||
                 Utilidades.validarCampo(direccion)||Utilidades.validarCampo(rango+"")||Utilidades.validarCampo(costo+"")

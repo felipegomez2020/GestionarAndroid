@@ -43,7 +43,7 @@ public class Afiliado implements Serializable {
     private Integer rango;
     @SerializedName("costo")
     @Expose
-    private Double costo;
+    private String costo;
 
     public String getCedula() {
         return cedula;
@@ -109,11 +109,11 @@ public class Afiliado implements Serializable {
         this.rango = rango;
     }
 
-    public Double getCosto() {
+    public String getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(String costo) {
         this.costo = costo;
     }
 
@@ -141,7 +141,7 @@ public class Afiliado implements Serializable {
         this.ultima_afiliacion = ultima_afiliacion;
     }
 
-    public Afiliado(String cedula, String nombres, String apellidos, String correo, String direccion, String telefono, String eps, String arl, String pension, Integer rango, Double costo) {
+    public Afiliado(String cedula, String nombres, String apellidos, String correo, String direccion, String telefono, String eps, String arl, String pension, Integer rango, String costo) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -36,10 +39,10 @@ public class RegistrarAfiliacion extends AppCompatActivity {
 
 
     String eps_array[]={"Medimas", "EmssanarEPS", "SOS EPS", "Sura EPS", "Coomeva EPS"};
-    String arl_array[]={"Proteccion", "Colpensiones", "Colfondos"};
-    String pension_array[]={"Sura", "Colpatria", "Colmena", "Positiva"};
+    String pension_array[]={"Proteccion", "Colpensiones", "Colfondos"};
+    String arl_array[]={"Sura", "Colpatria", "Colmena", "Positiva"};
 
-    String arl="",eps="",pension="";
+    String arl="",eps="",pension="",montoFinal;
 
 
     @Override
@@ -62,9 +65,32 @@ public class RegistrarAfiliacion extends AppCompatActivity {
         });
 
 
+        editText_costo.addTextChangedListener(new TextWatcher()
+        {
+            public void afterTextChanged(Editable s)
+            {
+                editText_costo.setSelection(editText_costo.getText().length(), editText_costo.getText().length());
+                montoFinal=Utilidades.stringMonetarioToDouble(editText_costo.getText().toString(),1);
+                if (editText_costo.getText().toString().equals(montoFinal)) {
+                } else {
+                    editText_costo.setText(montoFinal);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+        });
+
+
 
 
     }
+
 
     private void registrar()
     {
@@ -75,7 +101,7 @@ public class RegistrarAfiliacion extends AppCompatActivity {
         String direccion = editText_direccion.getText().toString();
         String telefono = editText_telefono.getText().toString();
         int rango = numberPicker.getValue();
-        String costo =editText_costo.getText().toString();
+        String costo = editText_costo.getText().toString();
 
         if (Utilidades.validarCampo(nombre)||Utilidades.validarCampo(apellidos)||Utilidades.validarCampo(cedula)||
                 Utilidades.validarCampo(direccion)||Utilidades.validarCampo(correo) ||Utilidades.validarCampo(rango+"")||Utilidades.validarCampo(costo+"")
@@ -91,8 +117,9 @@ public class RegistrarAfiliacion extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Correo no valido",Toast.LENGTH_SHORT).show();
             }else
                 {
+                    costo = costo.split(",")[0];
                     Afiliado afiliado= new Afiliado(cedula,nombre,apellidos,correo,direccion,
-                            telefono,eps,arl,pension,rango,Double.parseDouble(costo));
+                            telefono,eps,arl,pension,rango,costo);
 
 
                     Call<Afiliado> registro = apiRest.registro_afiliado(afiliado);
@@ -112,8 +139,9 @@ public class RegistrarAfiliacion extends AppCompatActivity {
                             }
                         }
                         @Override
-                        public void onFailure(Call<Afiliado> call, Throwable t) {
-
+                        public void onFailure(Call<Afiliado> call, Throwable t)
+                        {
+                            Toast.makeText(getApplicationContext(),"No se pudo registrar el usuario",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

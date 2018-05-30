@@ -28,6 +28,7 @@ import java.util.Map;
 
 import gestionar.soft3.inge.gestionar.ApiRest.ApiRest;
 import gestionar.soft3.inge.gestionar.ListCitas;
+import gestionar.soft3.inge.gestionar.ListDerechoPeticion;
 import gestionar.soft3.inge.gestionar.ListIngresos;
 import gestionar.soft3.inge.gestionar.ListMora;
 import gestionar.soft3.inge.gestionar.ListaAfiliados;
@@ -107,7 +108,8 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.card_derecho:
-                Toast.makeText(getActivity(),"Derecho",Toast.LENGTH_SHORT).show();
+                intent = new Intent(getActivity(), ListDerechoPeticion.class);
+                startActivity(intent);
                 break;
 
         }

@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +47,7 @@ import gestionar.soft3.inge.gestionar.Utilidades.Utilidades;
 import gestionar.soft3.inge.gestionar.fragments.DatePickerFragment;
 import gestionar.soft3.inge.gestionar.pojo.Afiliado;
 import gestionar.soft3.inge.gestionar.pojo.CitaMedica;
+import gestionar.soft3.inge.gestionar.pojo.DerechoPeticion;
 import gestionar.soft3.inge.gestionar.pojo.Ingreso;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,7 +102,7 @@ public class ListaAfiliados extends AppCompatActivity {
                     listView.setAdapter(afiliadosAdapter);
                 } if (response.code()==404)
             {
-                Toast.makeText(getApplicationContext(),"No hay beneficiarios para mostrar",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"No hay Afiliados para mostrar",Toast.LENGTH_LONG).show();
             }
 
 
@@ -357,6 +360,7 @@ public class ListaAfiliados extends AppCompatActivity {
                 else  if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonAgregarPeticion)
                 {
                     customDialog.dismiss();
+                    agregarDerechoPeticion(nombre, cedula);
                 }
 
 
@@ -390,7 +394,7 @@ public class ListaAfiliados extends AppCompatActivity {
         customDialog = new Dialog(ListaAfiliados.this);
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         customDialog.setCancelable(false);
-        customDialog.setContentView(R.layout.derecho_peticion);
+        customDialog.setContentView(R.layout.derecho);
 
         TextView tv_nom= customDialog.findViewById(R.id.tv_nombre);
         TextView tv_cedula= customDialog.findViewById(R.id.tv_Cedula_g);
@@ -398,57 +402,34 @@ public class ListaAfiliados extends AppCompatActivity {
         tv_nom.setText(nombre);
         tv_cedula.setText(cedula);
 
-        final EditText editText_motivo = customDialog.findViewById(R.id.editText_motivo);
-        final EditText editText_valor = customDialog.findViewById(R.id.editText_valor);
-        final EditText editText_fecha = customDialog.findViewById(R.id.editText_fecha);
-        final EditText editText_cedula= customDialog.findViewById(R.id.editText_cedula);
-        final EditText editText_nombre= customDialog.findViewById(R.id.editText_nombre);
+        final EditText editText_motivo = customDialog.findViewById(R.id.editText_descripcion);
+        final EditText editText_valor = customDialog.findViewById(R.id.editText_Costo);
 
 
-        Button btn_aceptar = customDialog.findViewById(R.id.btn_aceptar);
-        Button btn_cancelar = customDialog.findViewById(R.id.btn_cancelar);
+        editText_valor.addTextChangedListener(new TextWatcher()
+        {
+            public void afterTextChanged(Editable s)
+            {
+                editText_valor.setSelection(editText_valor.getText().length(), editText_valor.getText().length());
+                String montoFinal=Utilidades.stringMonetarioToDouble(editText_valor.getText().toString(),1);
+                if (editText_valor.getText().toString().equals(montoFinal)) {
+                } else {
+                    editText_valor.setText(montoFinal);
+                }
+            }
 
-        editText_fecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        // +1 because january is zero
-                        String dia="";
-                        String mes="";
-                        if (day<10)
-                        {
-                            dia = 0 + "" + day;
-                        }
-                        else
-                        {
-                            dia = day+"";
-                        }
-                        if (month<10)
-                        {
-                            mes = 0 + "" + (month+1);
-                        }
-                        else
-                        {
-                            mes = (month +1) +"";
-                        }
-
-
-
-
-                        final String selectedDate = year + "-" + mes + "-" + dia;
-                        editText_fecha.setText(selectedDate);
-                    }
-                });
-                newFragment.show(getFragmentManager(), "datePicker");
-
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
             }
         });
+
+
+        Button btn_aceptar = customDialog.findViewById(R.id.btn_aceptar);
+        Button btn_cancelar = customDialog.findViewById(R.id.btn_cancelar);
 
 
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
@@ -465,49 +446,36 @@ public class ListaAfiliados extends AppCompatActivity {
 
                 String motivo = editText_motivo.getText().toString();
                 String valor = editText_valor.getText().toString();
-                String fecha = editText_fecha.getText().toString();
-                String cedula_dos = editText_cedula.getText().toString();
-                String nombre = editText_nombre.getText().toString();
 
 
-
-                if (Utilidades.validarCampo(motivo)||
-                        Utilidades.validarCampo(valor) || Utilidades.validarCampo(fecha) ||
-                        Utilidades.validarCampo(cedula_dos) || Utilidades.validarCampo(nombre))
+                if (Utilidades.validarCampo(motivo)|| Utilidades.validarCampo(valor) || Utilidades.validarCampo(motivo))
                 {
                     customDialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Debes llenar todos los valores",Toast.LENGTH_SHORT).show();
                 }else
                 {
+                    DerechoPeticion derechoPeticion = new DerechoPeticion();
+                    derechoPeticion.setCedula(cedula);
+                    derechoPeticion.setCosto(valor);
+                    derechoPeticion.setDescripcion(motivo);
 
 
-                    CitaMedica citaMedica = new CitaMedica();
-                    citaMedica.setCedula(cedula);
-
-                    citaMedica.setNombre(nombre);
-                    citaMedica.setTipo_cita(motivo);
-                    citaMedica.setCedula_dos(cedula_dos);
-                    citaMedica.setValor(valor);
-                    citaMedica.setFecha_cita(fecha);
-                    citaMedica.setValor(valor);
-
-
-                    Call<CitaMedica>c = apiRest.registro_cita(citaMedica);
-                    c.enqueue(new Callback<CitaMedica>() {
+                    Call<DerechoPeticion>c = apiRest.registro_derecho(derechoPeticion);
+                    c.enqueue(new Callback<DerechoPeticion>() {
                         @Override
-                        public void onResponse(Call<CitaMedica> call, Response<CitaMedica> response)
+                        public void onResponse(Call<DerechoPeticion> call, Response<DerechoPeticion> response)
                         {
 
                             if (response.code()==200)
                             {
-                                Toast.makeText(getApplicationContext(),"Cita registrada " +
+                                Toast.makeText(getApplicationContext(),"Derecho de peticion registrado " +
                                         "correctamente" , Toast.LENGTH_SHORT).show();
                                 customDialog.dismiss();
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<CitaMedica> call, Throwable t) {
+                        public void onFailure(Call<DerechoPeticion> call, Throwable t) {
                             Toast.makeText(getApplicationContext(),"Problemas de " +
                                     "conexion, intente nuevamente" , Toast.LENGTH_SHORT).show();
                         }
@@ -522,6 +490,36 @@ public class ListaAfiliados extends AppCompatActivity {
         });
         customDialog.show();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void agregarCitaMedica(String nombre, final String cedula) {
 
@@ -544,6 +542,30 @@ public class ListaAfiliados extends AppCompatActivity {
         final EditText editText_nombre= customDialog.findViewById(R.id.editText_nombre);
 
 
+        editText_valor.addTextChangedListener(new TextWatcher()
+        {
+            public void afterTextChanged(Editable s)
+            {
+                editText_valor.setSelection(editText_valor.getText().length(), editText_valor.getText().length());
+                String[] montoFinal={""};
+                montoFinal[0] =Utilidades.stringMonetarioToDouble(editText_valor.getText().toString(),1);
+                if (editText_valor.getText().toString().equals(montoFinal[0])) {
+                } else {
+                    editText_valor.setText(montoFinal[0]);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+        });
+
+
+
         Button btn_aceptar = customDialog.findViewById(R.id.btn_aceptar);
         Button btn_cancelar = customDialog.findViewById(R.id.btn_cancelar);
 
@@ -607,6 +629,7 @@ public class ListaAfiliados extends AppCompatActivity {
                 String fecha = editText_fecha.getText().toString();
                 String cedula_dos = editText_cedula.getText().toString();
                 String nombre = editText_nombre.getText().toString();
+
 
 
 
@@ -682,6 +705,28 @@ public class ListaAfiliados extends AppCompatActivity {
 
         Button btn_aceptar = customDialog.findViewById(R.id.btn_aceptar);
         Button btn_cancelar = customDialog.findViewById(R.id.btn_cancelar);
+        final String[] montoFinal = {""};
+
+        editText_valor.addTextChangedListener(new TextWatcher()
+        {
+            public void afterTextChanged(Editable s)
+            {
+                editText_valor.setSelection(editText_valor.getText().length(), editText_valor.getText().length());
+                montoFinal[0] =Utilidades.stringMonetarioToDouble(editText_valor.getText().toString(),1);
+                if (editText_valor.getText().toString().equals(montoFinal[0])) {
+                } else {
+                    editText_valor.setText(montoFinal[0]);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+        });
 
 
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
@@ -705,6 +750,9 @@ public class ListaAfiliados extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Debes llenar todos los valores",Toast.LENGTH_SHORT).show();
                 }else
                 {
+
+
+
 
                     Ingreso ingreso = new Ingreso();
                     ingreso.setCedula(cedula);
